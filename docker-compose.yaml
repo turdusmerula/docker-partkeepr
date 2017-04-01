@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql
+    container_name: partkeepr_mysql
+    restart: unless-stopped
+    volumes:
+#      - /opt/partkeepr/mysql:/var/lib/mysql
+      - /opt/partkeepr:/opt/partkeepr
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=partkeepr
+      - MYSQL_USER=partkeepr
+      - MYSQL_PASSWORD=partkeepr
+      
+  apache:
+    build: ./apache
+    container_name: partkeepr_apache
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    environment:
+      - MYSQL_USER=partkeepr
+      - MYSQL_PASSWORD=partkeepr
+    volumes:
+      - ./apache/authkey.php:/var/www/partkeepr/app/authkey.php
+      - ./apache/parameters.php:/var/www/partkeepr/app/config/parameters.php
+      - /opt/partkeepr/data:/var/www/partkeepr/data
+    ports:
+      - "8080:80"
+
+
