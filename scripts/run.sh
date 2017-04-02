@@ -36,4 +36,6 @@ then
 	sed -i -e "s#'partkeepr.octopart.apikey', .*#'partkeepr.octopart.apikey', '${opt_octopart}'\);#g" /opt/partkeepr/parameters.php
 fi
 
+sudo chmod -R a+w /opt/partkeepr
+
 docker-compose up 

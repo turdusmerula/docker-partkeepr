@@ -25,8 +25,8 @@ services:
       - MYSQL_USER=partkeepr
       - MYSQL_PASSWORD=partkeepr
     volumes:
-      - /opt/authkey.php:/var/www/partkeepr/app/authkey.php
-      - /opt/parameters.php:/var/www/partkeepr/app/config/parameters.php
+      - /opt/partkeepr/authkey.php:/var/www/partkeepr/app/authkey.php
+      - /opt/partkeepr/parameters.php:/var/www/partkeepr/app/config/parameters.php
       - /opt/partkeepr/data:/var/www/partkeepr/data
     ports:
       - "8080:80"
