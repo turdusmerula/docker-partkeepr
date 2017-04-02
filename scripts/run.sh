@@ -33,7 +33,7 @@ fi
 if [[ "_$opt_octopart" != "_" ]]
 then
 	# add octopart api key
-	sed -i -e "s#'partkeepr.octopart.apikey', .*#'partkeepr.octopart.apikey', '${opt_octopart}'\);#g" /opt/partkeepr/partkeepr.php
+	sed -i -e "s#'partkeepr.octopart.apikey', .*#'partkeepr.octopart.apikey', '${opt_octopart}'\);#g" /opt/partkeepr/parameters.php
 fi
 
 docker-compose up 

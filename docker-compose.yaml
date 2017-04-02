@@ -4,7 +4,6 @@ services:
   mysql:
     image: mysql
     container_name: partkeepr_mysql
-    image: turdusmerula/partkeepr_mysql
     restart: unless-stopped
     volumes:
 #      - /opt/partkeepr/mysql:/var/lib/mysql
