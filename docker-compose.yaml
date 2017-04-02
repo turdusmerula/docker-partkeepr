@@ -4,6 +4,7 @@ services:
   mysql:
     image: mysql
     container_name: partkeepr_mysql
+    image: turdusmerula/partkeepr_mysql
     restart: unless-stopped
     volumes:
 #      - /opt/partkeepr/mysql:/var/lib/mysql
@@ -17,6 +18,7 @@ services:
   apache:
     build: ./apache
     container_name: partkeepr_apache
+    image: turdusmerula/partkeepr_apache
     restart: unless-stopped
     depends_on:
       - mysql
@@ -24,8 +26,8 @@ services:
       - MYSQL_USER=partkeepr
       - MYSQL_PASSWORD=partkeepr
     volumes:
-      - ./apache/authkey.php:/var/www/partkeepr/app/authkey.php
-      - ./apache/parameters.php:/var/www/partkeepr/app/config/parameters.php
+      - /opt/authkey.php:/var/www/partkeepr/app/authkey.php
+      - /opt/parameters.php:/var/www/partkeepr/app/config/parameters.php
       - /opt/partkeepr/data:/var/www/partkeepr/data
     ports:
       - "8080:80"

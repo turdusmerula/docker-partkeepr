@@ -1,0 +1,29 @@
+#!/bin/bash
+
+xpl_path=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
+
+source /usr/local/share/getopt/getopt.sh
+
+export opt_image=turdusmerula/partkeepr
+export opt_tag=latest
+
+getopt_command_description="COMMAND"
+getopt_add_help
+getopt_add_category "Data management commands"
+getopt_add_command "backup"  "backup data from partkeepr" ${xpl_path}/scripts/backup.sh
+getopt_add_command "restore" "restore data to runing partkeepr" ${xpl_path}/scripts/restore.sh
+
+#getopt_add_category "Github commands"
+#getopt_add_command "tag" "tag a release" ${xpl_path}/action/tag.sh
+
+getopt_add_category "Docker commands"
+getopt_add_command "build" "build partkeepr image" ${xpl_path}/scripts/build.sh
+getopt_add_command "pull"  "pull $opt_image:$opt_tag image" ${xpl_path}/scripts/pull.sh
+getopt_add_command "push"  "push $opt_image:$opt_tag image" ${xpl_path}/scripts/push.sh
+getopt_add_command "run"   "run partkeepr container" ${xpl_path}/scripts/run.sh
+getopt_set_args "$@" 
+
+getopt_read_args || {
+	getopt_usage
+	exit 1
+}

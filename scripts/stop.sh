@@ -11,4 +11,5 @@ getopt_read_args || {
 	exit 1
 }
 
-docker-compose pull
+docker stop  partkeepr_apache
+docker stop partkeepr_mysql
